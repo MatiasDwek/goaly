@@ -1,7 +1,7 @@
-import Calendar from "./components/calendar";
+import CompletedTasks from "./components/completedTasks";
 
 function App() {
-  return <Calendar />;
+  return <CompletedTasks />;
 }
 
 export default App;
