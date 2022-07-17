@@ -1,24 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { initializeCalendar } from './reducers/calendarReducer';
+import { useAppDispatch, useAppSelector } from './hooks';
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0);
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    });
-  }, []);
+    dispatch(initializeCalendar()) 
+  },[dispatch]);
 
+  const calendar = useAppSelector((state) => state.calendar);
   return (
-    <div className="App">
-      <header className="App-header">
-
-        ... no changes in this part ...
-
-        <p>The current time is {currentTime}.</p>
-      </header>
+    <div>
+      <h1>Task calendar</h1>
+      <ul>
+        {calendar.map(day =>
+          <li key={day.date}>
+            Day: {epochToDay(day.date)} Day score: {day.points}
+          </li>)}
+      </ul>
     </div>
   );
+}
+
+function epochToDay(epochDate: number): string {
+  const date = new Date(epochDate);
+  const stringDate = date.toLocaleString();
+  return stringDate.substring(stringDate.indexOf(","),length)
 }
 
 export default App;
