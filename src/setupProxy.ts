@@ -9,3 +9,5 @@ module.exports = function (app: any) {
     })
   );
 };
+
+export {};

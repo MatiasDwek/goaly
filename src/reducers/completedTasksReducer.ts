@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import completedTasksService from "../services/completedTasks";
 import { AppDispatch } from "../store";
 
-interface CompletedTask {
+export interface CompletedTask {
   date: number; // epoch millis
   points: number;
 }
@@ -15,8 +15,17 @@ const completedTasksSlice = createSlice({
   name: "completedTasks",
   initialState: initialState,
   reducers: {
-    setCompletedTasks(state, action: PayloadAction<CompletedTasks>) {
+    setCompletedTasks(
+      state: CompletedTasks,
+      action: PayloadAction<CompletedTasks>
+    ) {
       return action.payload;
+    },
+    appendCompletedTask(
+      state: CompletedTasks,
+      action: PayloadAction<CompletedTask>
+    ) {
+      return state.concat(action.payload);
     },
   },
 });
@@ -28,5 +37,13 @@ export const initializeCompletedTasks = () => {
   };
 };
 
-export const { setCompletedTasks } = completedTasksSlice.actions;
+export const completeTask = (content: CompletedTask) => {
+  return async (dispatch: AppDispatch) => {
+    const newCompletedTask = await completedTasksService.complete(content);
+    dispatch(appendCompletedTask(newCompletedTask));
+  };
+};
+
+export const { setCompletedTasks, appendCompletedTask } =
+  completedTasksSlice.actions;
 export default completedTasksSlice.reducer;
