@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import completedTasksService from "../services/completedTasks";
+import completedTasksService from "../services/completedTasksService";
 import { AppDispatch } from "../store";
 
 export interface CompletedTask {
