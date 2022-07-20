@@ -8,7 +8,7 @@ app = Flask(__name__)
 def get_current_time():
     return {'time': time.time()}
 
-@app.route('/completed-tasks')
+@app.route('/api/completed-tasks')
 def get_completed_tasks():
     return jsonify([
     {
