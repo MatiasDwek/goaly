@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CompletedTask } from "../reducers/completedTasksReducer";
 
-const baseUrl = "http://localhost:5000/completed-tasks";
+const baseUrl = "/api/completed-tasks";
 
 const get = async () => {
   const response = await axios.get(baseUrl);
