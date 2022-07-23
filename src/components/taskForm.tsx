@@ -1,10 +1,9 @@
 import { useAppDispatch } from "../hooks";
 import { useField } from "../hooks/useField";
-import { createTask, taskPoints } from "../reducers/tasksReducer";
+import { createTask, TaskPoints } from "../reducers/tasksReducer";
 
 const TaskForm = () => {
   const title = useField("text");
-  const description = useField("text");
   const points = useField("number");
   const dispatch = useAppDispatch();
 
@@ -12,12 +11,11 @@ const TaskForm = () => {
     event.preventDefault();
     const newTask = {
       title: title.value,
-      description: description.value,
-      points: parseInt(points.value) as taskPoints,
+      points: parseInt(points.value) as TaskPoints,
       creationDate: new Date(),
     };
     title.reset();
-    description.reset();
+    points.reset();
     dispatch(createTask(newTask));
   };
 
@@ -28,10 +26,6 @@ const TaskForm = () => {
         <div>
           Title
           <input {...title.props} required />
-        </div>
-        <div>
-          Description
-          <input {...description.props} />
         </div>
         <div>
           Points
