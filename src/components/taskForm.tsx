@@ -1,11 +1,12 @@
+import { useAppDispatch } from "../hooks";
 import { useField } from "../hooks/useField";
-import { taskPoints } from "../reducers/tasksReducer";
-import tasksService from "../services/tasksService";
+import tasksReducer, { createTask, taskPoints } from "../reducers/tasksReducer";
 
 const TaskForm = () => {
   const title = useField("text");
   const description = useField("text");
   const points = useField("number");
+  const dispatch = useAppDispatch();
 
   const handleSubmitTask = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -17,7 +18,7 @@ const TaskForm = () => {
     };
     title.reset();
     description.reset();
-    tasksService.createTask(newTask);
+    dispatch(createTask(newTask));
   };
 
   return (
@@ -26,7 +27,7 @@ const TaskForm = () => {
       <form onSubmit={handleSubmitTask}>
         <div>
           Title
-          <input {...title.props} />
+          <input {...title.props} required />
         </div>
         <div>
           Description
@@ -34,7 +35,7 @@ const TaskForm = () => {
         </div>
         <div>
           Points
-          <input {...points.props} min="1" max="3" />
+          <input {...points.props} min="1" max="3" required />
         </div>
         <button type="submit">Create</button>
       </form>

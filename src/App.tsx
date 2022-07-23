@@ -1,6 +1,7 @@
 import CompletedTasks from "./components/completedTasks";
 import CompleteTask from "./components/completeTask";
 import TaskForm from "./components/taskForm";
+import TaskList from "./components/TaskList";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <CompletedTasks />
       <CompleteTask />
       <TaskForm />
+      <TaskList />
     </div>
   );
 }
