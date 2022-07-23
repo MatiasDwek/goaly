@@ -10,6 +10,7 @@ const TaskList = () => {
   }, [dispatch]);
 
   const tasks = useAppSelector((state) => state.tasks);
+  const completedTasks = useAppSelector((state) => state.completedTasks);
   return (
     <div>
       <h1>Task list</h1>
@@ -20,6 +21,9 @@ const TaskList = () => {
               id={task.id as string}
               title={task.title}
               points={task.points}
+              completed={!!completedTasks.find(
+                (completed) => completed.taskId === task.id
+              )}
             />
           </li>
         ))}
