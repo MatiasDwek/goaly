@@ -40,5 +40,14 @@
       "points": 1,
       "id": 8
     }
+  ],
+  "tasks": [
+    {
+      "title": "Some task",
+      "description": "My task",
+      "points": 1,
+      "creationDate": 1658591048301,
+      "id": 1
+    }
   ]
 }
