@@ -1,22 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { initializeTasks } from "../reducers/tasksReducer";
-
-const Task = ({
-  title,
-  description,
-  points,
-}: {
-  title: string;
-  description: string;
-  points: number;
-}) => {
-  return (
-    <li>
-      <b>Task</b>: {title} <b>Description</b>: {description} <b>Points</b>: {points}
-    </li>
-  );
-};
+import Task from "./Task";
 
 const TaskList = () => {
   const dispatch = useAppDispatch();
@@ -30,12 +15,13 @@ const TaskList = () => {
       <h1>Task list</h1>
       <ul>
         {tasks.map((task) => (
-          <Task
-            key={task.id}
-            title={task.title}
-            description={task.description}
-            points={task.points}
-          />
+          <li key={task.id}>
+            <Task
+              id={task.id as string}
+              title={task.title}
+              points={task.points}
+            />
+          </li>
         ))}
       </ul>
     </div>

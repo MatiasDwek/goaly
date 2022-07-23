@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-type fieldType = "text" | "number";
+type FieldType = "text" | "number";
 
-export const useField = (type: fieldType) => {
+export const useField = (type: FieldType) => {
   const [value, setValue] = useState("");
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

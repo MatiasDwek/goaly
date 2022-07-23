@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { initializeCompletedTasks } from "../reducers/completedTasksReducer";
 
-const CompletedTask = ({ date, points }: { date: string; points: number }) => {
+const CompletedTask = ({ date, taskId }: { date: string; taskId: string }) => {
   return (
     <li>
-      Day: {date} --- Day score: {points}
+      Day: {date} - Task ID: {taskId}
     </li>
   );
 };
@@ -23,9 +23,9 @@ const CompletedTasks = () => {
       <ul>
         {completedTasks.map((completedTask) => (
           <CompletedTask
-            key={completedTask.date}
+            key={completedTask.date + completedTask.taskId}
             date={completedTask.date}
-            points={completedTask.points}
+            taskId={completedTask.taskId}
           />
         ))}
       </ul>

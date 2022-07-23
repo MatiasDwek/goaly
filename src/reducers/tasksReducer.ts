@@ -2,13 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import tasksService from "../services/tasksService";
 import { AppDispatch } from "../store";
 
-export type taskPoints = 1 | 2 | 3;
+export type TaskPoints = 1 | 2 | 3;
 
 export interface Task {
   id?: string;
   title: string;
-  description: string;
-  points: taskPoints;
+  points: TaskPoints;
   creationDate: Date;
 }
 

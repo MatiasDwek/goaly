@@ -3,8 +3,8 @@ import completedTasksService from "../services/completedTasksService";
 import { AppDispatch } from "../store";
 
 export interface CompletedTask {
+  taskId: string;
   date: string;
-  points: number;
 }
 
 type CompletedTasks = Array<CompletedTask>;
