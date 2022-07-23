@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { initializeCompletedTasks } from "../reducers/completedTasksReducer";
 
-const CompletedTask = ({ date, points }: { date: number; points: number }) => {
+const CompletedTask = ({ date, points }: { date: string; points: number }) => {
   return (
     <li>
-      Day: {epochToDay(date)} --- Day score: {points}
+      Day: {date} --- Day score: {points}
     </li>
   );
 };
@@ -32,11 +32,5 @@ const CompletedTasks = () => {
     </div>
   );
 };
-
-function epochToDay(epochDate: number): string {
-  const date = new Date(epochDate);
-  const stringDate = date.toLocaleString();
-  return stringDate.substring(stringDate.indexOf(","), length);
-}
 
 export default CompletedTasks;

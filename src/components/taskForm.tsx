@@ -13,7 +13,7 @@ const TaskForm = () => {
       title: title.value,
       description: description.value,
       points: parseInt(points.value) as taskPoints,
-      creationDate: Date.now(),
+      creationDate: new Date(),
     };
     title.reset();
     description.reset();
