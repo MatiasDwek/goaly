@@ -1,6 +1,6 @@
-import CompletedTasks from "./components/completedTasks";
-import CompleteTask from "./components/completeTask";
-import TaskForm from "./components/taskForm";
+import CompletedTasks from "./components/CompletedTasks";
+import CompleteTask from "./components/CompleteTaskForm";
+import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 
 function App() {

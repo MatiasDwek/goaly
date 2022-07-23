@@ -1,6 +1,6 @@
 import { useAppDispatch } from "../hooks";
 import { useField } from "../hooks/useField";
-import tasksReducer, { createTask, taskPoints } from "../reducers/tasksReducer";
+import { createTask, taskPoints } from "../reducers/tasksReducer";
 
 const TaskForm = () => {
   const title = useField("text");
