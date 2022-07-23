@@ -3,7 +3,7 @@ import { Task } from "../reducers/tasksReducer";
 
 const baseUrl = "/api/tasks";
 
-const getTask = async () => {
+const getAllTasks = async () => {
   const response = await axios.get(baseUrl);
   return response.data;
 };
@@ -24,7 +24,7 @@ const deleteTask = async (taskId: string) => {
 };
 
 export default {
-  getTask,
+  getAllTasks,
   createTask,
   updateTask,
   deleteTask,

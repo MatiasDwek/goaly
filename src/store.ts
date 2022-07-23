@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import completedTasksReducer from "./reducers/completedTasksReducer";
+import tasksReducer from "./reducers/tasksReducer";
 
 const store = configureStore({
   reducer: {
     completedTasks: completedTasksReducer,
+    tasks: tasksReducer,
   },
 });
 
