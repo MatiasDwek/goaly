@@ -5,5 +5,5 @@ export interface Task {
   title: string;
   description: string;
   points: taskPoints;
-  creationDate: number;
+  creationDate: Date;
 }

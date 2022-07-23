@@ -11,7 +11,7 @@ const CompleteTaskForm = () => {
   ) => {
     event.preventDefault();
     const newCompletedTask = {
-      date: new Date(completionDate).getTime(),
+      date: getFormattedDate(false), // TODO select either yesterday or today
       points: 1,
     };
     dispatch(completeTask(newCompletedTask));
@@ -30,5 +30,14 @@ const CompleteTaskForm = () => {
     </form>
   );
 };
+
+// Returns the date in YYYY/MM/DD format
+function getFormattedDate(dayBefore: boolean): string {
+  const date = new Date();
+  if (dayBefore) {
+    date.setDate(date.getDate() - 1);
+  }
+  return `${date.getUTCFullYear()}/${date.getUTCMonth()}/${date.getUTCDate()}`;
+}
 
 export default CompleteTaskForm;

@@ -3,7 +3,7 @@ import completedTasksService from "../services/completedTasksService";
 import { AppDispatch } from "../store";
 
 export interface CompletedTask {
-  date: number; // epoch millis
+  date: string;
   points: number;
 }
 
