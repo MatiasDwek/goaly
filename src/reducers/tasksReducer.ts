@@ -8,7 +8,6 @@ export interface Task {
   id?: string;
   title: string;
   points: TaskPoints;
-  creationDate: Date;
 }
 
 const initialState: Task[] = [];
