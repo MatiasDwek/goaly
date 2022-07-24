@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { completeTask } from "../reducers/completedTasksReducer";
 import { getFormattedDate } from "../utils/dateUtils";
 import { Day } from "../utils/dateUtils";
@@ -24,6 +24,11 @@ const CheckInForm = ({
   useEffect(() => {
     setDay(initDay);
   }, [completedToday]);
+
+  const loading = useAppSelector((state) => state.loading);
+  if (loading.completedTasks) {
+    return <div>Loading...</div>;
+  }
 
   const handleComplete = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

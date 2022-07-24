@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import tasksService from "../services/tasksService";
 import { AppDispatch } from "../store";
+import { loaded } from "./loadingReducer";
 
 export type TaskPoints = 1 | 2 | 3;
 
@@ -29,6 +30,7 @@ export const initializeTasks = () => {
   return async (dispatch: AppDispatch) => {
     const tasks = await tasksService.getAllTasks();
     dispatch(setTasks(tasks));
+    dispatch(loaded("tasks"));
   };
 };
 
