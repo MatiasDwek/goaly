@@ -1,12 +1,29 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch } from "../hooks";
 import { completeTask } from "../reducers/completedTasksReducer";
+import { getFormattedDate } from "../utils/dateUtils";
+import { Day } from "../utils/dateUtils";
 
-type Day = "today" | "yesterday";
+interface CheckInFormProps {
+  id: string;
+  completedYesterday: boolean;
+  completedToday: boolean;
+  initDay: Day;
+}
 
-const CheckInForm = ({ id }: { id: string }) => {
+const CheckInForm = ({
+  id,
+  completedToday,
+  completedYesterday,
+  initDay,
+}: CheckInFormProps) => {
   const dispatch = useAppDispatch();
-  const [day, setDay] = useState<Day>("today");
+  const [day, setDay] = useState<Day>(initDay);
+
+  useEffect(() => {
+    setDay(initDay);
+  }, [completedToday]);
 
   const handleComplete = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -14,6 +31,7 @@ const CheckInForm = ({ id }: { id: string }) => {
       date: getFormattedDate(day),
       taskId: id,
     };
+    setDay(day === "today" ? "yesterday" : "today");
     dispatch(completeTask(newCompletedTask));
   };
   return (
@@ -28,20 +46,16 @@ const CheckInForm = ({ id }: { id: string }) => {
           setDay(e.target.value as Day);
         }}
       >
-        <option value="yesterday">Yesterday</option>
-        <option value="today">Today</option>
+        <option value="yesterday" disabled={completedYesterday}>
+          Yesterday {completedYesterday && "✅"}
+        </option>
+
+        <option value="today" disabled={completedToday}>
+          Today {completedToday && "✅"}
+        </option>
       </select>
     </form>
   );
 };
-
-// Returns the date in YYYY/MM/DD format
-function getFormattedDate(day: Day): string {
-  const date = new Date();
-  if (day === "yesterday") {
-    date.setDate(date.getDate() - 1);
-  }
-  return `${date.getUTCFullYear()}/${date.getUTCMonth()}/${date.getUTCDate()}`;
-}
 
 export default CheckInForm;
