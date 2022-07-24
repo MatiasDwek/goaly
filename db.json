@@ -1,5 +1,31 @@
 {
-  "completed-tasks": [],
+  "completed-tasks": [
+    {
+      "date": "2022/6/24",
+      "taskId": 1,
+      "id": 1
+    },
+    {
+      "date": "2022/6/24",
+      "taskId": 2,
+      "id": 2
+    },
+    {
+      "date": "2022/6/24",
+      "taskId": 3,
+      "id": 3
+    },
+    {
+      "date": "2022/6/24",
+      "taskId": 4,
+      "id": 4
+    },
+    {
+      "date": "2022/6/23",
+      "taskId": 2,
+      "id": 5
+    }
+  ],
   "tasks": [
     {
       "title": "Go to the gym",
@@ -12,6 +38,18 @@
       "points": 2,
       "creationDate": "2022-07-23T16:47:11.578Z",
       "id": 2
+    },
+    {
+      "title": "Hacer API",
+      "points": 3,
+      "creationDate": "2022-07-24T19:40:31.172Z",
+      "id": 3
+    },
+    {
+      "title": "hola",
+      "points": 1,
+      "creationDate": "2022-07-24T19:40:43.921Z",
+      "id": 4
     }
   ]
 }
