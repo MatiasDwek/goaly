@@ -82,4 +82,4 @@ def create_tasks():
     input_json = request.get_json(force=True) 
     db.append(input_json)
     print(db)
-    return "a"
+    return input_json
