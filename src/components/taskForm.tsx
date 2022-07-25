@@ -12,6 +12,7 @@ const TaskForm = () => {
     const newTask = {
       title: title.value,
       points: parseInt(points.value) as TaskPoints,
+      creationDate: new Date(),
     };
     title.reset();
     points.reset();
