@@ -10,6 +10,10 @@ const TaskList = () => {
   }, [dispatch]);
 
   const tasks = useAppSelector((state) => state.tasks);
+  const loading = useAppSelector((state) => state.loading);
+  if (loading.tasks) {
+    return <div>Loading your tasks...</div>;
+  }
   return (
     <div>
       <h1>Task list</h1>

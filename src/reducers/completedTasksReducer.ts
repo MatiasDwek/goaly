@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import completedTasksService from "../services/completedTasksService";
 import { AppDispatch } from "../store";
+import { loaded } from "./loadingReducer";
 
 export interface CompletedTask {
   taskId: string;
@@ -34,6 +35,7 @@ export const initializeCompletedTasks = () => {
   return async (dispatch: AppDispatch) => {
     const completedTasks = await completedTasksService.get();
     dispatch(setCompletedTasks(completedTasks));
+    dispatch(loaded("completedTasks"));
   };
 };
 
