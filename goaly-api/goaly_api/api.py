@@ -2,84 +2,42 @@ import time
 from flask import Flask
 from flask import jsonify
 from flask import request
+import random
+from datetime import datetime
 
 app = Flask(__name__)
 
-#TEST FOR A DATABASE AS PYTHON LIST
-
-db_test = [{
-      "date": "2022/6/24",
-      "taskId": 1,
-      "id": 1
-    },
-    {
-      "date": "2022/6/24",
-      "taskId": 2,
-      "id": 2
-    },
-    {
-      "date": "2022/6/24",
-      "taskId": 3,
-      "id": 3
-    },
-    {
-      "date": "2022/6/24",
-      "taskId": 4,
-      "id": 4
-    },
-    {
-      "date": "2022/6/23",
-      "taskId": 2,
-      "id": 5
-    }]
-
-@app.route('/api/completed-tasks-demo')
-def get_completed_tasks_demo():
-    return jsonify(db_test)
-
-##############################################
-
-@app.route('/api/completed-tasks')
+@app.get('/api/completed-tasks')
 def get_completed_tasks():
-    return jsonify([
-    {
-      "date": "2022/6/24",
-      "taskId": 1,
-      "id": 1
-    },
-    {
-      "date": "2022/6/24",
-      "taskId": 2,
-      "id": 2
-    },
-    {
-      "date": "2022/6/24",
-      "taskId": 3,
-      "id": 3
-    },
-    {
-      "date": "2022/6/24",
-      "taskId": 4,
-      "id": 4
-    },
-    {
-      "date": "2022/6/23",
-      "taskId": 2,
-      "id": 5
-    }
-  ])
+    return jsonify(db_completed_tasks)
 
-@app.route('/api/tasks')
+@app.get('/api/tasks')
 def get_tasks():
-    return jsonify(db)
+    return jsonify(db_tasks)
 
 #POST
 
-db = []
+db_tasks = []
+db_completed_tasks = []
 
-@app.route('/api/tasks', methods=['POST'])
-def create_tasks():
-    input_json = request.get_json(force=True) 
-    db.append(input_json)
-    print(db)
+@app.post('/api/completed-tasks')
+def complete_tasks():
+    input_json = request.get_json() 
+    db_completed_tasks.append(input_json)
     return input_json
+
+@app.post('/api/tasks')
+def create_task():
+    input_json = request.get_json()
+    new_task = {}
+    new_task["points"] = input_json.get("points")
+    if new_task["points"] is None:
+      return "Points not specified", 400
+    if new_task["points"] > 2:
+      return "Points larger than maximum", 400
+    new_task["title"] = input_json["title"]
+    new_task["id"] = int(random.random()*100000)
+    new_task["date"] = 1
+    db_tasks.append(new_task)
+    return new_task
+    #recuperar la fecha
