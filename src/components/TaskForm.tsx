@@ -1,37 +1,74 @@
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { useState } from "react";
 import { useAppDispatch } from "../hooks";
 import { useField } from "../hooks/useField";
 import { createTask, TaskPoints } from "../reducers/tasksReducer";
 
 const TaskForm = () => {
   const title = useField("text");
-  const points = useField("number");
+  const [showCreate, updateShow] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleSubmitTask = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newTask = {
       title: title.value,
-      points: parseInt(points.value) as TaskPoints,
+      points: 1 as TaskPoints,
     };
     title.reset();
-    points.reset();
+    updateShow(false);
     dispatch(createTask(newTask));
   };
 
+  if (!showCreate) {
+    return (
+      <Button
+        variant="outlined"
+        onClick={() => {
+          updateShow(true);
+        }}
+      >
+        New Task
+      </Button>
+    );
+  }
+
   return (
     <div>
-      <h2>Create a new task</h2>
-      <form onSubmit={handleSubmitTask}>
-        <div>
-          Title
-          <input {...title.props} required />
-        </div>
-        <div>
-          Points
-          <input {...points.props} min="1" max="3" required />
-        </div>
-        <button type="submit">Create</button>
-      </form>
+      <Typography variant="h6" noWrap component="h6">
+        New task
+      </Typography>
+
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmitTask}
+      >
+        <TextField
+          required
+          id="task-title"
+          label="Title"
+          defaultValue="Title"
+          InputLabelProps={{ required: false }}
+          {...title.props}
+        />
+        <Button
+          variant="outlined"
+          type="submit"
+          onClick={() => {
+            updateShow(true);
+          }}
+        >
+          Create
+        </Button>
+      </Box>
     </div>
   );
 };
