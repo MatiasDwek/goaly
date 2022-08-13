@@ -1,7 +1,12 @@
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { initializeTasks } from "../reducers/tasksReducer";
 import Task from "./Task";
+import TaskForm from "./TaskForm";
 
 const TaskList = () => {
   const dispatch = useAppDispatch();
@@ -16,18 +21,23 @@ const TaskList = () => {
   }
   return (
     <div>
-      <h1>Task list</h1>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <Task
-              id={task.id as string}
-              title={task.title}
-              points={task.points}
-            />
-          </li>
+      <Typography variant="h5" noWrap component="h5">
+        Task list
+      </Typography>
+      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+        {tasks.map((task, index) => (
+          <div key={task.id}>
+            {index ? <Divider /> : null}
+            <ListItem>
+              <Task
+                id={task.id as string}
+                title={task.title}
+                points={task.points}
+              />
+            </ListItem>
+          </div>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };

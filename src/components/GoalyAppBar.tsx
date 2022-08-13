@@ -9,7 +9,7 @@ const GoalyAppBar = () => {
       position="static"
       elevation={0}
       sx={{
-        bgcolor: "background.default",
+        bgcolor: "background.paper",
         borderBottom: 1,
         borderColor: "grey.300",
       }}
@@ -28,7 +28,7 @@ const GoalyAppBar = () => {
               textDecoration: "none",
             }}
           >
-            GOALY
+            🔥 Goaly
           </Typography>
         </Toolbar>
       </Container>

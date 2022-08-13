@@ -1,3 +1,4 @@
+import ListItemText from "@mui/material/ListItemText";
 import { useAppSelector } from "../hooks";
 import { TaskPoints } from "../reducers/tasksReducer";
 import { getFormattedDate } from "../utils/dateUtils";
@@ -30,7 +31,10 @@ const Task = ({ title, points, id }: TaskProps) => {
 
   return (
     <div>
-      <b>{title}</b> - {points} point{points !== 1 ? "s" : ""}
+      <ListItemText
+        primary={title + (allCompleted ? "✅" : "")}
+        secondary={points + " point" + (points !== 1 ? "s" : "")}
+      />
       {!allCompleted && (
         <CheckInForm
           id={id}
@@ -39,7 +43,6 @@ const Task = ({ title, points, id }: TaskProps) => {
           initDay={completed.today ? "yesterday" : "today"}
         />
       )}
-      {allCompleted && "✅"}
     </div>
   );
 };
