@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { initializeTasks } from "../reducers/tasksReducer";
 import Task from "./Task";
-import TaskForm from "./TaskForm";
 
 const TaskList = () => {
   const dispatch = useAppDispatch();
