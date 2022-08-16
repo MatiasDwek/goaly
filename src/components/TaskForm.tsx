@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { useAppDispatch } from "../hooks";
 import { useField } from "../hooks/useField";
-import { createTask, TaskPoints } from "../reducers/tasksReducer";
+import { createTask } from "../reducers/tasksReducer";
 
 const TaskForm = () => {
   const title = useField("text");
@@ -16,7 +16,6 @@ const TaskForm = () => {
     event.preventDefault();
     const newTask = {
       title: title.value,
-      points: 1 as TaskPoints,
     };
     title.reset();
     updateShow(false);

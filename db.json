@@ -3,12 +3,10 @@
   "tasks": [
     {
       "title": "Go to the gym",
-      "points": 3,
       "id": 1
     },
     {
       "title": "Read a book",
-      "points": 2,
       "id": 2
     }
   ]

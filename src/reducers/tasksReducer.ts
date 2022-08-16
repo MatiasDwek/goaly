@@ -3,12 +3,9 @@ import tasksService from "../services/tasksService";
 import { AppDispatch } from "../store";
 import { loaded } from "./loadingReducer";
 
-export type TaskPoints = 1 | 2 | 3;
-
 export interface Task {
   id?: string;
   title: string;
-  points: TaskPoints;
 }
 
 const initialState: Task[] = [];

@@ -28,11 +28,7 @@ const TaskList = () => {
           <div key={task.id}>
             {index ? <Divider /> : null}
             <ListItem>
-              <Task
-                id={task.id as string}
-                title={task.title}
-                points={task.points}
-              />
+              <Task id={task.id as string} title={task.title} />
             </ListItem>
           </div>
         ))}

@@ -1,16 +1,14 @@
 import ListItemText from "@mui/material/ListItemText";
 import { useAppSelector } from "../hooks";
-import { TaskPoints } from "../reducers/tasksReducer";
 import { getFormattedDate } from "../utils/dateUtils";
 import CheckInForm from "./CheckInForm";
 
 interface TaskProps {
   title: string;
-  points: TaskPoints;
   id: string;
 }
 
-const Task = ({ title, points, id }: TaskProps) => {
+const Task = ({ title, id }: TaskProps) => {
   const completedTasks = useAppSelector((state) => state.completedTasks);
   const completed = completedTasks.reduce(
     (acc, completedTask) => {
@@ -31,10 +29,7 @@ const Task = ({ title, points, id }: TaskProps) => {
 
   return (
     <div>
-      <ListItemText
-        primary={title + (allCompleted ? "✅" : "")}
-        secondary={points + " point" + (points !== 1 ? "s" : "")}
-      />
+      <ListItemText primary={title + (allCompleted ? "✅" : "")} />
       {!allCompleted && (
         <CheckInForm
           id={id}
