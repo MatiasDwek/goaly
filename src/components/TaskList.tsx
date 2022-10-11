@@ -24,12 +24,12 @@ const TaskList = () => {
         Task list
       </Typography>
       <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        {tasks.map((task, index) => (
+        {tasks.map((task) => (
           <div key={task.id}>
-            {index ? <Divider /> : null}
             <ListItem>
               <Task id={task.id as string} title={task.title} />
             </ListItem>
+            <Divider />
           </div>
         ))}
       </List>

@@ -1,7 +1,7 @@
 import ListItemText from "@mui/material/ListItemText";
 import { useAppSelector } from "../hooks";
 import { getFormattedDate } from "../utils/dateUtils";
-import CheckInForm from "./CheckInForm";
+import { SplitButton } from "./CheckInForm";
 
 interface TaskProps {
   title: string;
@@ -31,7 +31,7 @@ const Task = ({ title, id }: TaskProps) => {
     <div>
       <ListItemText primary={title + (allCompleted ? "✅" : "")} />
       {!allCompleted && (
-        <CheckInForm
+        <SplitButton
           id={id}
           completedToday={completed.today}
           completedYesterday={completed.yesterday}
