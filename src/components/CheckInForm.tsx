@@ -9,7 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import Popper from "@mui/material/Popper";
-import * as React from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { completeTask } from "../reducers/completedTasksReducer";
 import { CheckInDay, getFormattedDate } from "../utils/dateUtils";
@@ -33,9 +33,13 @@ export function SplitButton({
   initDay,
 }: CheckInFormProps) {
   const dispatch = useAppDispatch();
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLDivElement>(null);
-  const [selectedDay, setSelectedDay] = React.useState(initDay);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const [selectedDay, setSelectedDay] = useState(initDay);
+
+  useEffect(() => {
+    setSelectedDay(initDay);
+  });
 
   const loading = useAppSelector((state) => state.loading);
   if (loading.completedTasks) {
@@ -77,7 +81,7 @@ export function SplitButton({
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <ButtonGroup
         variant="contained"
         ref={anchorRef}
@@ -141,7 +145,7 @@ export function SplitButton({
           </Grow>
         )}
       </Popper>
-    </React.Fragment>
+    </Fragment>
   );
 }
 
