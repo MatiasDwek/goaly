@@ -25,19 +25,16 @@ const Task = ({ title, id }: TaskProps) => {
     },
     { today: false, yesterday: false }
   );
-  const allCompleted = completed.today && completed.yesterday;
 
   return (
     <div>
-      <ListItemText primary={title + (allCompleted ? "✅" : "")} />
-      {!allCompleted && (
-        <SplitButton
-          id={id}
-          completedToday={completed.today}
-          completedYesterday={completed.yesterday}
-          initDay={completed.today ? "yesterday" : "today"}
-        />
-      )}
+      <ListItemText primary={title} />
+      <SplitButton
+        id={id}
+        completedToday={completed.today}
+        completedYesterday={completed.yesterday}
+        initDay={completed.today ? "yesterday" : "today"}
+      />
     </div>
   );
 };

@@ -39,7 +39,7 @@ export function SplitButton({
 
   useEffect(() => {
     setSelectedDay(initDay);
-  });
+  }, [completedToday, completedYesterday]);
 
   const loading = useAppSelector((state) => state.loading);
   if (loading.completedTasks) {
@@ -87,13 +87,19 @@ export function SplitButton({
         ref={anchorRef}
         aria-label="split button"
       >
-        <Button onClick={handleClick}>{options[selectedDay]}</Button>
+        <Button
+          disabled={completedToday && completedYesterday}
+          onClick={handleClick}
+        >
+          {options[selectedDay]}
+        </Button>
         <Button
           size="small"
           aria-controls={open ? "split-button-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
           aria-label="select merge strategy"
           aria-haspopup="menu"
+          disabled={completedToday && completedYesterday}
           onClick={handleToggle}
         >
           <ArrowDropDownIcon />
@@ -120,25 +126,27 @@ export function SplitButton({
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id="split-button-menu" autoFocusItem>
-                  {Object.entries(options).map((option) => {
-                    const optionDay = option[0] as CheckInDay;
-                    const optionValue = option[1];
-                    return (
-                      <MenuItem
-                        key={optionDay}
-                        disabled={
-                          (optionDay === "today" && completedToday) ||
-                          (optionDay === "yesterday" && completedYesterday)
-                        }
-                        selected={optionDay === selectedDay}
-                        onClick={(event) =>
-                          handleMenuItemClick(event, optionDay)
-                        }
-                      >
-                        {optionValue}
-                      </MenuItem>
-                    );
-                  })}
+                  {Object.entries(options)
+                    .sort()
+                    .map((option) => {
+                      const optionDay = option[0] as CheckInDay;
+                      const optionValue = option[1];
+                      return (
+                        <MenuItem
+                          key={optionDay}
+                          disabled={
+                            (optionDay === "today" && completedToday) ||
+                            (optionDay === "yesterday" && completedYesterday)
+                          }
+                          selected={optionDay === selectedDay}
+                          onClick={(event) =>
+                            handleMenuItemClick(event, optionDay)
+                          }
+                        >
+                          {optionValue}
+                        </MenuItem>
+                      );
+                    })}
                 </MenuList>
               </ClickAwayListener>
             </Paper>

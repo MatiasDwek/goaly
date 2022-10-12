@@ -1,8 +1,9 @@
+import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useAppDispatch } from "../hooks";
 import { useField } from "../hooks/useField";
 import { createTask } from "../reducers/tasksReducer";
@@ -36,7 +37,7 @@ const TaskForm = () => {
   }
 
   return (
-    <div>
+    <Fragment>
       <Typography variant="h6" noWrap component="h6">
         New task
       </Typography>
@@ -57,17 +58,33 @@ const TaskForm = () => {
           InputLabelProps={{ required: false }}
           {...title.props}
         />
-        <Button
-          variant="outlined"
-          type="submit"
-          onClick={() => {
-            updateShow(true);
-          }}
-        >
-          Create
-        </Button>
+        <Grid container>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={() => {
+                updateShow(true);
+              }}
+            >
+              Create
+            </Button>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                updateShow(false);
+                title.reset();
+              }}
+            >
+              Cancel
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
-    </div>
+    </Fragment>
   );
 };
 
