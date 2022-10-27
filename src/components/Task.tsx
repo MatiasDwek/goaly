@@ -1,15 +1,14 @@
+import ListItemText from "@mui/material/ListItemText";
 import { useAppSelector } from "../hooks";
-import { TaskPoints } from "../reducers/tasksReducer";
 import { getFormattedDate } from "../utils/dateUtils";
-import CheckInForm from "./CheckInForm";
+import { SplitButton } from "./CheckInForm";
 
 interface TaskProps {
   title: string;
-  points: TaskPoints;
   id: string;
 }
 
-const Task = ({ title, points, id }: TaskProps) => {
+const Task = ({ title, id }: TaskProps) => {
   const completedTasks = useAppSelector((state) => state.completedTasks);
   const completed = completedTasks.reduce(
     (acc, completedTask) => {
@@ -26,20 +25,16 @@ const Task = ({ title, points, id }: TaskProps) => {
     },
     { today: false, yesterday: false }
   );
-  const allCompleted = completed.today && completed.yesterday;
 
   return (
     <div>
-      <b>{title}</b> - {points} point{points !== 1 ? "s" : ""}
-      {!allCompleted && (
-        <CheckInForm
-          id={id}
-          completedToday={completed.today}
-          completedYesterday={completed.yesterday}
-          initDay={completed.today ? "yesterday" : "today"}
-        />
-      )}
-      {allCompleted && "✅"}
+      <ListItemText primary={title} />
+      <SplitButton
+        id={id}
+        completedToday={completed.today}
+        completedYesterday={completed.yesterday}
+        initDay={completed.today ? "yesterday" : "today"}
+      />
     </div>
   );
 };

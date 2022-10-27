@@ -1,3 +1,7 @@
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { initializeTasks } from "../reducers/tasksReducer";
@@ -16,18 +20,19 @@ const TaskList = () => {
   }
   return (
     <div>
-      <h1>Task list</h1>
-      <ul>
+      <Typography variant="h5" noWrap component="h5">
+        Task list
+      </Typography>
+      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
         {tasks.map((task) => (
-          <li key={task.id}>
-            <Task
-              id={task.id as string}
-              title={task.title}
-              points={task.points}
-            />
-          </li>
+          <div key={task.id}>
+            <ListItem>
+              <Task id={task.id as string} title={task.title} />
+            </ListItem>
+            <Divider />
+          </div>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };
