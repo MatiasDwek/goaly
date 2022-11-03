@@ -8,7 +8,7 @@ export interface CompletedTask {
   date: string;
 }
 
-type CompletedTasks = Array<CompletedTask>;
+export type CompletedTasks = Array<CompletedTask>;
 
 const initialState: CompletedTasks = [];
 
