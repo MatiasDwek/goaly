@@ -1,28 +1,26 @@
 import Box from "@mui/material/Box";
 import { CompletedTasks } from "../../reducers/completedTasksReducer";
-import { Week } from "../../types/calendar";
+import { COLOR_BY_QUANTILE } from "../../styles/theme";
+import { Day, Week } from "../../types/calendar";
 import { createCalendar } from "../../utils/dateUtils";
 
-const commonStyles = {
-  bgcolor: "background.paper",
-  m: 1,
-  border: 1,
-  width: "5rem",
-  height: "5rem",
-};
+function getDayStyle(quantile: number) {
+  return {
+    bgcolor:
+      COLOR_BY_QUANTILE[
+        Math.min(quantile, Object.keys(COLOR_BY_QUANTILE).length - 1)
+      ],
+    borderColor: "text.primary",
+    width: 12,
+    height: 12,
+    border: 0.5,
+    borderRadius: 0.4,
+    m: 0.2,
+  };
+}
 
-const shapeStyles = {
-  bgcolor: "primary.main",
-  borderColor: "text.primary",
-  width: 12,
-  height: 12,
-  border: 0.5,
-  borderRadius: 0.4,
-  m: 0.2,
-};
-
-export const CalendarDay = () => {
-  return <Box sx={shapeStyles} />;
+export const CalendarDay = ({ day }: { day: Day }) => {
+  return <Box sx={getDayStyle(day.quantile)} />;
 };
 
 const CalendarWeek = ({ week }: { week: Week }) => {
@@ -34,7 +32,7 @@ const CalendarWeek = ({ week }: { week: Week }) => {
       }}
     >
       {week.map((day) => {
-        return <CalendarDay key={day.date.valueOf()} />;
+        return <CalendarDay key={day.date.valueOf()} day={day} />;
       })}
     </Box>
   );

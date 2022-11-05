@@ -1,19 +1,5 @@
 import { createTheme } from "@mui/material/styles";
 
-declare module "@mui/material/styles" {
-  interface Theme {
-    status: {
-      danger: string;
-    };
-  }
-  // allow configuration using `createTheme`
-  interface ThemeOptions {
-    status?: {
-      danger?: string;
-    };
-  }
-}
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -34,5 +20,15 @@ const theme = createTheme({
     },
   },
 });
+
+export const COLOR_BY_QUANTILE: {
+  [quantile: number]: string;
+} = {
+  0: "#eeeeee",
+  1: "#d15353",
+  2: "#c62828",
+  3: "#c62828",
+  4: "#8a1c1c",
+};
 
 export default theme;
