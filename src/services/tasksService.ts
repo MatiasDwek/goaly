@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Task } from "../reducers/tasksReducer";
+import { Task } from "../types/task";
 
 const baseUrl = "/api/tasks";
 

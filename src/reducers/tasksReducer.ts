@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import tasksService from "../services/tasksService";
 import { AppDispatch } from "../store";
+import { Task } from "../types/task";
 import { loaded } from "./loadingReducer";
-
-export interface Task {
-  id?: string;
-  title: string;
-}
 
 const initialState: Task[] = [];
 
