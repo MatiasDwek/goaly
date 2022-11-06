@@ -1,4 +1,4 @@
-import { CompletedTasks } from "../reducers/completedTasksReducer";
+import { CompletedTasks } from "./completedTask";
 
 export interface Day {
   date: Date;

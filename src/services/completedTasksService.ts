@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CompletedTask } from "../reducers/completedTasksReducer";
+import { CompletedTask } from "../types/completedTask";
 
 const baseUrl = "/api/completed-tasks";
 

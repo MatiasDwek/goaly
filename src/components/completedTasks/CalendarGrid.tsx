@@ -1,8 +1,8 @@
 import { alpha } from "@mui/material";
 import Box from "@mui/material/Box";
-import { CompletedTasks } from "../../reducers/completedTasksReducer";
 import { COLOR_BY_QUANTILE } from "../../styles/theme";
 import { Day, Week } from "../../types/calendar";
+import { CompletedTasks } from "../../types/completedTask";
 import { prepend } from "../../utils/commonUtils";
 import { createCalendar } from "../../utils/dateUtils";
 

@@ -1,14 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import completedTasksService from "../services/completedTasksService";
 import { AppDispatch } from "../store";
+import { CompletedTask, CompletedTasks } from "../types/completedTask";
 import { loaded } from "./loadingReducer";
-
-export interface CompletedTask {
-  taskId: string;
-  date: string;
-}
-
-export type CompletedTasks = Array<CompletedTask>;
 
 const initialState: CompletedTasks = [];
 

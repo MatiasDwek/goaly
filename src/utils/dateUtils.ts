@@ -1,5 +1,5 @@
-import { CompletedTasks } from "../reducers/completedTasksReducer";
 import { Calendar, Week } from "../types/calendar";
+import { CompletedTasks } from "../types/completedTask";
 
 export type CheckInDay = "today" | "yesterday";
 
