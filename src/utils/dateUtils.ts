@@ -24,6 +24,13 @@ export function createCalendar(
   const byDateCompletedTasks = toByDateCompletedTasks(completedTasks);
   let pointer = end;
 
+  // Create array of all dates from start to end
+  while (pointer.valueOf() - start.valueOf() > 0) {
+    dates.push(pointer);
+    const newDate = new Date(pointer);
+    pointer = new Date(newDate.setDate(newDate.getDate() - 1)); // get day before
+  }
+
   const completedTasksInDay = Object.values(byDateCompletedTasks).reduce(
     (filtered: Array<number>, completedTasks) => {
       if (completedTasks.length > 0) {
@@ -40,13 +47,6 @@ export function createCalendar(
   );
   // Reverse so that we find first the last quartile (prettier coloring)
   completedTasksQuantileValues.reverse();
-
-  // Create array of all dates from start to end
-  while (pointer.valueOf() - start.valueOf() > 0) {
-    dates.push(pointer);
-    const newDate = new Date(pointer);
-    pointer = new Date(newDate.setDate(newDate.getDate() - 1)); // get day before
-  }
 
   // Arrange all dates in arrays of weeks
   const arrangedWeeks: Array<Week> = [];
@@ -77,6 +77,7 @@ export function createCalendar(
     });
     arrangedWeeks.push(week);
   });
+  arrangedWeeks.forEach((week) => week.reverse());
 
   return arrangedWeeks;
 }
