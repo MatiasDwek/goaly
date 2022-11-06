@@ -8,7 +8,7 @@ interface TaskProps {
   id: string;
 }
 
-const Task = ({ title, id }: TaskProps) => {
+const TaskElement = ({ title, id }: TaskProps) => {
   const completedTasks = useAppSelector((state) => state.completedTasks);
   const completed = completedTasks.reduce(
     (acc, completedTask) => {
@@ -39,4 +39,4 @@ const Task = ({ title, id }: TaskProps) => {
   );
 };
 
-export default Task;
+export default TaskElement;

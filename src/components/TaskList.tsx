@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { initializeTasks } from "../reducers/tasksReducer";
-import Task from "./Task";
+import TaskElement from "./TaskElement";
 
 const TaskList = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ const TaskList = () => {
         {tasks.map((task) => (
           <div key={task.id}>
             <ListItem>
-              <Task id={task.id as string} title={task.title} />
+              <TaskElement id={task.id as string} title={task.title} />
             </ListItem>
             <Divider />
           </div>
