@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { initializeCompletedTasks } from "../reducers/completedTasksReducer";
@@ -28,7 +29,9 @@ const CompletedTasks = () => {
   const completedTasks = useAppSelector((state) => state.completedTasks);
   return (
     <div>
-      <h1>Completed tasks calendar</h1>
+      <Typography variant="h5" noWrap component="h5">
+        Completed tasks calendar
+      </Typography>
       <CalendarGrid
         startDay={startDay}
         endDay={today}
