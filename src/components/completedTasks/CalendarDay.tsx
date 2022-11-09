@@ -1,7 +1,9 @@
-import { alpha } from "@mui/material";
+import { alpha, Fade, Tooltip } from "@mui/material";
 import Box from "@mui/material/Box";
+import { Fragment } from "react";
 import { COLOR_BY_QUANTILE } from "../../styles/theme";
 import { Day } from "../../types/calendar";
+import { getHumanReadableDay } from "../../utils/dateUtils";
 
 function getDayStyle(quantile: number) {
   return {
@@ -28,7 +30,27 @@ function getPadDayStyle() {
 
 export const CalendarDay = ({ day }: { day: Day | undefined }) => {
   if (day !== undefined) {
-    return <Box sx={getDayStyle(day.quantile)} />;
+    const numberOfCompletedTasks = day.completedTasks.length;
+    return (
+      <Tooltip
+        arrow
+        title={
+          <Fragment>
+            <b>
+              {numberOfCompletedTasks > 0 ? `${numberOfCompletedTasks}` : "No"}
+              {" completed tasks on "}
+            </b>
+            {getHumanReadableDay(day.date)}
+          </Fragment>
+        }
+        TransitionComponent={Fade}
+        TransitionProps={{ timeout: 0 }}
+        placement="top"
+        disableInteractive
+      >
+        <Box sx={getDayStyle(day.quantile)} />
+      </Tooltip>
+    );
   } else {
     // undefined days are for padding
     return <Box sx={getPadDayStyle()} />;
