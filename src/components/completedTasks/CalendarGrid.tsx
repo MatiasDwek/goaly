@@ -10,7 +10,6 @@ const DayLegend = ({ day }: { day: string }) => {
       display="flex"
       flexDirection="column"
       justifyContent="center"
-      // alignItems="center"
       sx={{
         bgcolor: alpha("#ffffff", 1),
         width: 30,
