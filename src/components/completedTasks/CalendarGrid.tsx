@@ -1,7 +1,7 @@
 import { alpha, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { CompletedTasks } from "../../types/completedTask";
-import { createCalendar } from "../../utils/dateUtils";
+import { createCalendar } from "../../utils/calendarUtils";
 import { CalendarWeek } from "./CalendarWeek";
 
 const DayLegend = ({ day }: { day: string }) => {

@@ -12,7 +12,8 @@ import Popper from "@mui/material/Popper";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { completeTask } from "../reducers/completedTasksReducer";
-import { CheckInDay, getFormattedDate } from "../utils/dateUtils";
+import { CheckInDay } from "../types/completedTask";
+import { getFormattedDate } from "../utils/dateUtils";
 
 interface CheckInFormProps {
   id: string;

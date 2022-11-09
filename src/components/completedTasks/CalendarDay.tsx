@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import { Fragment } from "react";
 import { COLOR_BY_QUANTILE } from "../../styles/theme";
 import { Day } from "../../types/calendar";
+import { getHumanReadableDay } from "../../utils/dateUtils";
 
 function getDayStyle(quantile: number) {
   return {
@@ -43,7 +44,7 @@ export const CalendarDay = ({ day }: { day: Day | undefined }) => {
           </Fragment>
         }
         TransitionComponent={Fade}
-        TransitionProps={{ timeout: 50 }}
+        TransitionProps={{ timeout: 0 }}
         placement="top"
         disableInteractive
       >
@@ -55,26 +56,3 @@ export const CalendarDay = ({ day }: { day: Day | undefined }) => {
     return <Box sx={getPadDayStyle()} />;
   }
 };
-
-// TODO move to utils class
-const MONTH_SHORT_NAMES = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-function getHumanReadableDay(date: Date): string {
-  const humanReadableDate = `${
-    MONTH_SHORT_NAMES[date.getMonth()]
-  } ${date.getDate()}, ${date.getFullYear()}`;
-  return humanReadableDate;
-}
