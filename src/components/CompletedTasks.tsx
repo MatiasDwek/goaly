@@ -4,20 +4,6 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { initializeCompletedTasks } from "../reducers/completedTasksReducer";
 import { CalendarGrid } from "./completedTasks/CalendarGrid";
 
-const CompletedTaskDebug = ({
-  date,
-  taskId,
-}: {
-  date: string;
-  taskId: string;
-}) => {
-  return (
-    <li>
-      Day: {date} - Task ID: {taskId}
-    </li>
-  );
-};
-
 const CompletedTasks = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
