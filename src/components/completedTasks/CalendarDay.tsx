@@ -5,18 +5,22 @@ import { COLOR_BY_QUANTILE } from "../../styles/theme";
 import { Day } from "../../types/calendar";
 import { getHumanReadableDay } from "../../utils/dateUtils";
 
+export const DAY_WIDTH = 12;
+export const DAY_BORDER = 0.5;
+export const DAY_MARGIN = 0.2;
+
 function getDayStyle(quantile: number) {
   return {
     bgcolor:
       COLOR_BY_QUANTILE[
         Math.min(quantile, Object.keys(COLOR_BY_QUANTILE).length - 1)
       ],
-    width: 12,
+    width: DAY_WIDTH,
     height: 12,
-    border: 0.5,
+    border: DAY_BORDER,
     borderRadius: 0.4,
     borderColor: "grey.500",
-    m: 0.2,
+    m: DAY_MARGIN,
   };
 }
 
