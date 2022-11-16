@@ -37,15 +37,6 @@ const CompletedTasks = () => {
         endDay={today}
         completedTasks={completedTasks}
       ></CalendarGrid>
-      <ul>
-        {completedTasks.map((completedTask) => (
-          <CompletedTaskDebug
-            key={completedTask.date + completedTask.taskId}
-            date={completedTask.date}
-            taskId={completedTask.taskId}
-          />
-        ))}
-      </ul>
     </div>
   );
 };
