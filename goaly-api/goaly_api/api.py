@@ -5,12 +5,18 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 
-from .api_helpers import generate_id, validate_date
+from goaly_api.api_helpers import generate_id, validate_date
 
 app = Flask(__name__)
 
 tasks_db = {}
 completed_tasks_db = {}
+
+
+# This route is needed for the default EB health check route
+@app.route('/')
+def home():
+    return "ok"
 
 
 @app.get("/api/completed-tasks")
