@@ -1,0 +1,17 @@
+attrs==21.4.0
+click==8.1.3
+Flask==2.1.2
+-e git+https://github.com/MatiasDwek/goaly.git@ceb91add82b169c7c187959464845871cf350ffc#egg=goaly_api&subdirectory=goaly-api
+gunicorn==20.1.0
+itsdangerous==2.1.2
+Jinja2==3.1.2
+MarkupSafe==2.1.1
+more-itertools==8.13.0
+packaging==21.3
+pluggy==0.13.1
+py==1.11.0
+pyparsing==3.0.9
+pytest==5.4.3
+python-dotenv==0.20.0
+wcwidth==0.2.5
+Werkzeug==2.1.2
