@@ -11,7 +11,7 @@ poetry run flask run
 Launching gunicorn server
 
 ```
-gunicorn wsgi:app -w 2 -b localhost:5000 -t 30
+gunicorn wsgi:app -w 2 -b localhost:8080 -t 30
 ```
 
 # Getting Started with Create React App
