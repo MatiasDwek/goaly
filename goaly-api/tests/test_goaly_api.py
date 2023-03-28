@@ -1,4 +1,4 @@
-from goaly_api import __version__
+from api import __version__
 
 
 def test_version():

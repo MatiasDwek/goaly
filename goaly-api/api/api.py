@@ -5,7 +5,7 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 
-from goaly_api.api_helpers import generate_id, validate_date
+from api.api_helpers import generate_id, validate_date
 
 app = Flask(__name__)
 
