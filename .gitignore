@@ -24,3 +24,6 @@ yarn-error.log*
 
 # IDE
 .idea/
+
+# AWS
+/goaly-api/aws_deploy
