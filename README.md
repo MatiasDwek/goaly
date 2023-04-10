@@ -8,10 +8,10 @@ To run the Flask application, from `goaly-api`:
 poetry run flask run
 ```
 
-Launching gunicorn server
+Launching gunicorn server (2 workers):
 
 ```
-gunicorn wsgi:app -w 2 -b localhost:8080 -t 30
+gunicorn api.wsgi:app -w 2 -b localhost:8080 -t 30
 ```
 
 # Getting Started with Create React App
