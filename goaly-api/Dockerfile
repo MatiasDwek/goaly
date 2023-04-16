@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.10-alpine
 WORKDIR /goaly-api
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
