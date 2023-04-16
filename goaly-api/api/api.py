@@ -33,6 +33,7 @@ def get_tasks():
 def create_task():
     input_task = request.get_json()
     title = input_task.get("title")
+    logging.info(f"Received create task request with title {title}")
     if not title:
         return "Task title cannot be empty", 400
     if len(title) > 200:
@@ -52,6 +53,7 @@ def create_task():
 def complete_task():
     input_completed_task = request.get_json()
     task_id = input_completed_task.get("taskId")
+    logging.info(f"Received complete task {task_id}")
     if task_id not in tasks_db:
         return "Task id not found", 404
 
