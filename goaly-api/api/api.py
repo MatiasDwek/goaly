@@ -1,5 +1,8 @@
+import configparser
 import logging
+import os
 import time
+from logging.handlers import RotatingFileHandler
 
 from flask import Flask
 from flask import jsonify
@@ -8,6 +11,29 @@ from flask import request
 from api.api_helpers import generate_id, validate_date
 
 app = Flask(__name__)
+
+app_env = os.environ.get('APP_ENV', 'dev')
+
+# Load configuration from appropriate file based on environment
+if app_env == 'dev':
+    config_file = 'config/dev.ini'
+else:
+    config_file = 'config/prod.ini'
+
+# Parse the configuration file
+config = configparser.ConfigParser()
+config.read(config_file)
+
+if app_env == 'dev':
+    log_handler = logging.StreamHandler()
+else:
+    log_handler = RotatingFileHandler(config.get('logging', 'file'),
+                                      maxBytes=config.getint('logging', 'max_bytes'),
+                                      backupCount=config.getint('logging', 'backup_count'))
+
+log_handler.setLevel(config.get('logging', 'level'))
+log_handler.setFormatter(logging.Formatter(config.get('logging', 'format')))
+logging.getLogger().addHandler(log_handler)
 
 tasks_db = {}
 completed_tasks_db = {}
