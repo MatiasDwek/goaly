@@ -7,6 +7,9 @@ from flask import request
 
 from api.api_helpers import generate_id, validate_date
 
+logging.basicConfig(format='%(levelname)s:%(name)s:%(message)s', level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 app = Flask(__name__)
 
 tasks_db = {}
@@ -33,7 +36,7 @@ def get_tasks():
 def create_task():
     input_task = request.get_json()
     title = input_task.get("title")
-    logging.info(f"Received create task request with title {title}")
+    logger.info(f"Received create task request with title {title}")
     if not title:
         return "Task title cannot be empty", 400
     if len(title) > 200:
@@ -41,7 +44,7 @@ def create_task():
 
     task_id = generate_id()
     if task_id in tasks_db:
-        logging.error(f"Error creating task {task_id}, duplicated id")
+        logger.error(f"Error creating task {task_id}, duplicated id")
         return "Error creating task, try again", 500
 
     new_task = {"id": task_id, "title": title, "creationDate": time.time()}
@@ -53,7 +56,7 @@ def create_task():
 def complete_task():
     input_completed_task = request.get_json()
     task_id = input_completed_task.get("taskId")
-    logging.info(f"Received complete task {task_id}")
+    logger.info(f"Received complete task {task_id}")
     if task_id not in tasks_db:
         return "Task id not found", 404
 
@@ -63,7 +66,7 @@ def complete_task():
 
     completed_task_id = generate_id()
     if completed_task_id in tasks_db:
-        logging.error(
+        logger.error(
             f"Error completing task {task_id}, duplicated id {completed_task_id}"
         )
         return "Error completing task, try again", 500
