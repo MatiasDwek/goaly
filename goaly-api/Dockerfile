@@ -1,4 +1,5 @@
 FROM python:3.10-alpine
+LABEL "com.datadoghq.ad.logs"='[{"source": "python", "service": "goaly-api"}]'
 WORKDIR /goaly-api
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
