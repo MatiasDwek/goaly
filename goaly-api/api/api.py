@@ -8,6 +8,7 @@ from flask import request
 from pythonjsonlogger import jsonlogger
 
 from .api_helpers import generate_id, validate_date
+from .db.schema import create_tables
 
 app_env = os.environ.get('APP_ENV', 'dev')
 
@@ -93,4 +94,5 @@ def complete_task():
 
 
 if __name__ == "__main__":
+    create_tables()
     app.run()
