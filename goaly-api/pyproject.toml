@@ -8,6 +8,7 @@ authors = ["Matias Dwek <matiasdwek@gmail.com>"]
 python = "^3.10"
 Flask = "^2.1.2"
 python-dotenv = "^0.20.0"
+ddtrace = "^1.12.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
