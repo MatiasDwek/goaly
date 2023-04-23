@@ -7,7 +7,7 @@ from flask import jsonify
 from flask import request
 from pythonjsonlogger import jsonlogger
 
-from api.api_helpers import generate_id, validate_date
+from .api_helpers import generate_id, validate_date
 
 app_env = os.environ.get('APP_ENV', 'dev')
 

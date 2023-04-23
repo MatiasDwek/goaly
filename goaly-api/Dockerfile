@@ -1,9 +1,18 @@
 FROM python:3.10-alpine
+
 LABEL "com.datadoghq.ad.logs"='[{"source": "python", "service": "goaly-api"}]'
+ENV DD_SERVICE=goaly-api
+ENV DD_ENV=prod
+ENV DD_LOGS_INJECTION=true
+ENV DD_AGENT_HOST=172.17.0.1
+ENV APP_ENV=prod
+
 WORKDIR /goaly-api
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 EXPOSE 8080
 COPY . .
+
 WORKDIR /goaly-api/
-CMD ["gunicorn", "api.wsgi:app", "-w 2", "-b 0.0.0.0:8080", "-t 30"]
+# Change workers to > 1 when we have the database
+CMD ["ddtrace-run", "gunicorn", "api.wsgi:app", "-w 1", "-b 0.0.0.0:8080", "-t 30"]
