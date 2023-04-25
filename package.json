@@ -28,6 +28,8 @@
   "scripts": {
     "start": "react-scripts start",
     "start-api": "cd goaly-api && poetry run flask run --no-debugger -p 8080",
+    "start-docker-api": "cd goaly-api/devlocal && docker-compose up",
+    "build-docker-api": "cd goaly-api/devlocal && docker-compose build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

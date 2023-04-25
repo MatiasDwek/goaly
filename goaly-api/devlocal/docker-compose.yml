@@ -14,9 +14,9 @@ services:
     command: ["gunicorn", "api.wsgi:app", "-w 2", "-b 0.0.0.0:8080", "-t 30"]
   
   cockroachdb:
-    image: cockroachdb/cockroach:v21.2.2
+    image: cockroachdb/cockroach:v22.2.8
     ports:
       - "26257:26257"
     volumes:
       - ./cockroach-data:/cockroach/cockroach-data
-    command: start --insecure --join=goaly-api:26257
+    command: start-single-node --insecure 
