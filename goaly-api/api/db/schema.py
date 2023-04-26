@@ -5,7 +5,7 @@ import psycopg
 def create_tables():
     # Database connection parameters
     conn = psycopg.connect(
-        dbname="your_db_name",
+        dbname="tasks",
         user="root",
         password="",
         host="cockroachdb",

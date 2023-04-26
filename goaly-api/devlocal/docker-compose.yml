@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   goaly-api:
@@ -10,13 +10,19 @@ services:
     volumes:
       - ..:/goaly-api
     depends_on:
-      - cockroachdb
+      cockroachdb:
+        condition: service_healthy
     command: ["gunicorn", "api.wsgi:app", "-w 2", "-b 0.0.0.0:8080", "-t 30"]
-  
+
   cockroachdb:
     image: cockroachdb/cockroach:v22.2.8
     ports:
       - "26257:26257"
     volumes:
       - ./cockroach-data:/cockroach/cockroach-data
-    command: start-single-node --insecure 
+    healthcheck:
+      test: ["CMD", "cockroach", "node", "status", "--insecure"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+    command: start-single-node --insecure

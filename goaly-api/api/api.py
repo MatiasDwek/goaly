@@ -25,6 +25,9 @@ else:
 
 app = Flask(__name__)
 
+# Move this to another place to avoid creating the tables on every worker
+create_tables()
+
 tasks_db = {}
 completed_tasks_db = {}
 
@@ -94,5 +97,4 @@ def complete_task():
 
 
 if __name__ == "__main__":
-    create_tables()
     app.run()
