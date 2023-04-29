@@ -2,10 +2,8 @@ FROM python:3.10-alpine
 
 LABEL "com.datadoghq.ad.logs"='[{"source": "python", "service": "goaly-api"}]'
 ENV DD_SERVICE=goaly-api
-ENV DD_ENV=prod
 ENV DD_LOGS_INJECTION=true
 ENV DD_AGENT_HOST=172.17.0.1
-ENV APP_ENV=prod
 
 WORKDIR /goaly-api
 COPY requirements.txt requirements.txt

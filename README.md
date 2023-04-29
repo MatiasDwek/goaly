@@ -33,3 +33,8 @@ Alternatively, you can launch a json server dev environment with:
 ```
 yarn server
 ```
+
+# Deployment
+
+Edit `Dockerrun.aws.json` with `git update-index --no-skip-worktree goaly-api/aws_deploy/Dockerrun.aws.json` and add
+your image URL.

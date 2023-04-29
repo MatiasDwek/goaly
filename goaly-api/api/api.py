@@ -1,39 +1,20 @@
 import logging
-import os
 import time
 
-from flask import Flask
-from flask import jsonify
-from flask import request
-from pythonjsonlogger import jsonlogger
+from flask import Flask, jsonify, request
 
 from .api_helpers import generate_id, validate_date
-from .db.schema import create_tables
-
-app_env = os.environ.get('APP_ENV', 'dev')
-
-if app_env == 'dev':
-    logging.basicConfig(format='%(levelname)s:%(name)s:%(message)s', level=logging.INFO)
-    logger = logging.getLogger(__name__)
-else:
-    logger = logging.getLogger()
-    logHandler = logging.StreamHandler()
-    formatter = jsonlogger.JsonFormatter('%(timestamp)s %(levelname)s %(message)s ', timestamp=True)
-    logHandler.setFormatter(formatter)
-    logger.setLevel(logging.INFO)
-    logger.addHandler(logHandler)
 
 app = Flask(__name__)
-
-# Move this to another place to avoid creating the tables on every worker
-create_tables()
 
 tasks_db = {}
 completed_tasks_db = {}
 
+logger = logging.getLogger(__name__)
+
 
 # This route is needed for the default EB health check route
-@app.route('/')
+@app.route("/")
 def home():
     return "ok"
 
