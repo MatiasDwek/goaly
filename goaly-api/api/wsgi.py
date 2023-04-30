@@ -3,7 +3,7 @@ import os
 
 from pythonjsonlogger import jsonlogger
 
-from .api import app
+from .controllers import app
 from .db.schema import create_tables
 
 app_env = os.environ.get("APP_ENV", "dev")

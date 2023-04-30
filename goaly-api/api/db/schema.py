@@ -7,50 +7,62 @@ import psycopg
 def create_tables():
     logging.info("Creating database tables...")
 
-    # Database connection parameters
-    conn = psycopg.connect(
+    # Connect to an existing database
+    with psycopg.connect(
         dbname="tasks", user="root", password="", host="cockroachdb", port="26257"
-    )
+    ) as conn:
+        # Open a cursor to perform database operations
+        with conn.cursor() as cur:
+            # Create the database
+            cur.execute("CREATE DATABASE IF NOT EXISTS tasks;")
 
-    # Create a cursor object to interact with the database
-    cur = conn.cursor()
+            # Create the `users` table
+            # -------------------------------------------------
+            # | user_id            | username | email             | ... |
+            # -------------------------------------------------
+            # | abc-def-ghi       | user1    | user1@example.com | ... |
+            users_table = """
+                CREATE TABLE users (
+                  user_id VARCHAR(11) NOT NULL PRIMARY KEY,
+                  username VARCHAR(255) NOT NULL UNIQUE,
+                  email VARCHAR(255) NOT NULL UNIQUE,
+                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+            """
+            cur.execute(users_table)
 
-    # Create the Users table
-    cur.execute(
-        """
-        CREATE TABLE IF NOT EXISTS users (
-            user_id SERIAL PRIMARY KEY,
-            username VARCHAR(255),
-            email VARCHAR(255),
-            password VARCHAR(255)
-        )
-    """
-    )
+            # Create the `tasks` table
+            # --------------------------------------
+            # | task_id            | task_name | creation_date |
+            # --------------------------------------
+            # | abc-def-ghi       | Task 1    | 2023-04-23    |
+            cur.execute(
+                """
+                CREATE TABLE tasks (
+                  task_id VARCHAR(11) NOT NULL PRIMARY KEY,
+                  user_id VARCHAR(11) NOT NULL,
+                  name VARCHAR(255) NOT NULL,
+                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                  FOREIGN KEY (user_id) REFERENCES users(user_id)
+                );
+            """
+            )
 
-    # Create the Tasks table
-    cur.execute(
-        """
-        CREATE TABLE IF NOT EXISTS tasks (
-            task_id SERIAL PRIMARY KEY,
-            task_name VARCHAR(255),
-            creation_date DATE
-        )
-    """
-    )
+            # Create the `completed_tasks` table
+            # ------------------------------------------------------------
+            # | completed_task_id | user_id           | task_id         | completion_date |
+            # ------------------------------------------------------------
+            # | abc-def-ghi      | abc-def-ghi       | abc-def-ghi     | 2023-04-23      |
+            cur.execute(
+                """
+                CREATE TABLE completed_tasks (
+                  task_id VARCHAR(11) NOT NULL,
+                  completed_at DATE NOT NULL,
+                  PRIMARY KEY (task_id, completed_at),
+                  FOREIGN KEY (task_id) REFERENCES tasks(task_id)
+                );
+            """
+            )
 
-    # Create the Completed_Tasks table
-    cur.execute(
-        """
-        CREATE TABLE IF NOT EXISTS completed_tasks (
-            completed_task_id SERIAL PRIMARY KEY,
-            user_id INTEGER REFERENCES users(user_id),
-            task_id INTEGER REFERENCES tasks(task_id),
-            completion_date DATE
-        )
-    """
-    )
-
-    # Commit the changes and close the cursor and connection
-    conn.commit()
-    cur.close()
-    conn.close()
+            # Make the changes to the database persistent
+            conn.commit()
