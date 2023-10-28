@@ -22,7 +22,7 @@ def create_tables():
             # -------------------------------------------------
             # | abc-def-ghi       | user1    | user1@example.com | ... |
             users_table = """
-                CREATE TABLE users (
+                CREATE TABLE IF NOT EXISTS users (
                   user_id VARCHAR(11) NOT NULL PRIMARY KEY,
                   username VARCHAR(255) NOT NULL UNIQUE,
                   email VARCHAR(255) NOT NULL UNIQUE,
@@ -38,7 +38,7 @@ def create_tables():
             # | abc-def-ghi       | Task 1    | 2023-04-23    |
             cur.execute(
                 """
-                CREATE TABLE tasks (
+                CREATE TABLE IF NOT EXISTS tasks (
                   task_id VARCHAR(11) NOT NULL PRIMARY KEY,
                   user_id VARCHAR(11) NOT NULL,
                   name VARCHAR(255) NOT NULL,
@@ -55,7 +55,7 @@ def create_tables():
             # | abc-def-ghi      | abc-def-ghi       | abc-def-ghi     | 2023-04-23      |
             cur.execute(
                 """
-                CREATE TABLE completed_tasks (
+                CREATE TABLE IF NOT EXISTS completed_tasks (
                   task_id VARCHAR(11) NOT NULL,
                   completed_at DATE NOT NULL,
                   PRIMARY KEY (task_id, completed_at),
