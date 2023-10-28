@@ -12,7 +12,7 @@ services:
     depends_on:
       cockroachdb:
         condition: service_healthy
-    command: [ "gunicorn", "--preload", "api.wsgi:app", "-w 2", "-b 0.0.0.0:8080", "-t 30" ]
+    command: [ "gunicorn", "--preload", "api.wsgi:app", "-w 1", "-b 0.0.0.0:8080", "-t 30" ]
 
   cockroachdb:
     image: cockroachdb/cockroach:v22.2.8
