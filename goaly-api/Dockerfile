@@ -12,5 +12,5 @@ EXPOSE 8080
 COPY . .
 
 WORKDIR /goaly-api/
-# Change workers to > 1 when we have the database
+# TODO Change workers to > 1 when we have the database
 CMD ["ddtrace-run", "gunicorn", "api.wsgi:app", "-w 1", "-b 0.0.0.0:8080", "-t 30"]

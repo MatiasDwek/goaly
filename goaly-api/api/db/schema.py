@@ -4,13 +4,11 @@ import psycopg
 
 
 # Create the database tables
-def create_tables():
+def create_tables(db_url: str):
     logging.info("Creating database tables...")
 
     # Connect to an existing database
-    with psycopg.connect(
-        dbname="tasks", user="root", password="", host="cockroachdb", port="26257"
-    ) as conn:
+    with psycopg.connect(db_url) as conn:
         # Open a cursor to perform database operations
         with conn.cursor() as cur:
             # Create the database
