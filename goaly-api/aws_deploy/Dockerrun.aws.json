@@ -9,5 +9,11 @@
       "ContainerPort": 8080,
       "HostPort": 8080
     }
+  ],
+  "Volumes": [
+    {
+      "HostDirectory": "/root/.postgresql",
+      "ContainerDirectory": "/root/.postgresql"
+    }
   ]
 }
