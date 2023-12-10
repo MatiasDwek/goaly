@@ -28,6 +28,8 @@ Then launch the dev environment with:
 yarn start-docker-api
 ```
 
+To connect to the dev db run: `docker exec -it <cockroachdb_container_id_or_name> ./cockroach sql --insecure`
+
 Alternatively, you can launch a json server dev environment with:
 
 ```
